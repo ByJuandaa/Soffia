@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Sofi ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #fff7fb;
+      --bg-soft: #ffe9f3;
+      --rose: #f8b8cc;
+      --rose-strong: #e9789b;
+      --wine: #b64c6d;
+      --white: #ffffff;
+      --text: #5d3a48;
+      --shadow: 0 10px 30px rgba(233, 120, 155, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background: radial-gradient(circle at top, var(--bg-soft), var(--bg-main) 60%);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .hearts-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: rgba(233, 120, 155, 0.5);
+      transform: rotate(45deg);
+      animation: floatUp linear forwards;
+      border-radius: 3px;
+      filter: blur(0.2px);
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .heart::before { left: -7px; }
+    .heart::after { top: -7px; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg) scale(0.7);
+        opacity: 0;
+      }
+      20% { opacity: 0.8; }
+      100% {
+        transform: translateY(-110vh) rotate(45deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+      animation: twinkle 2.4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(248, 184, 204, 0.55);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+      padding: clamp(1.2rem, 2.4vw, 2rem);
+      backdrop-filter: blur(2px);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      text-align: center;
+      padding-top: 2.2rem;
+      padding-bottom: 2.2rem;
+      background: linear-gradient(150deg, rgba(255,255,255,0.92), rgba(255,233,243,0.95));
+    }
+
+    .title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+      color: var(--wine);
+      margin-bottom: 0.4rem;
+      text-shadow: 0 4px 20px rgba(233, 120, 155, 0.25);
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.7vw, 1.25rem);
+      max-width: 700px;
+      margin: 0 auto;
+      color: #7a5261;
+    }
+
+    .section-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--rose-strong);
+      margin-bottom: 1rem;
+    }
+
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .song-card {
+      background: linear-gradient(180deg, #fff, #fff4f8);
+      border: 1px solid rgba(233, 120, 155, 0.3);
+      border-radius: 16px;
+      padding: 1rem;
+      display: grid;
+      gap: 0.8rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .song-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(182, 76, 109, 0.16);
+    }
+
+    .song-title {
+      font-weight: 600;
+      color: #704453;
+    }
+
+    .song-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      background: linear-gradient(120deg, var(--rose), var(--rose-strong));
+      color: white;
+      padding: 0.6rem 0.95rem;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter 0.2s ease, transform 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      filter: brightness(1.06);
+      transform: scale(1.03);
+    }
+
+    .btn.secondary {
+      background: #fce1eb;
+      color: #8b4c62;
+    }
+
+    .message-card {
+      background: linear-gradient(170deg, #fff, #fff6fa);
+      border: 1px dashed rgba(182, 76, 109, 0.35);
+      border-radius: 16px;
+      padding: clamp(1rem, 2.2vw, 1.6rem);
+      font-size: clamp(0.98rem, 2.5vw, 1.13rem);
+      position: relative;
+      overflow: hidden;
+      animation: gentleGlow 4s ease-in-out infinite;
+    }
+
+    .message-card::before {
+      content: '💌';
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 1.25rem;
+      opacity: 0.6;
+    }
+
+    @keyframes gentleGlow {
+      0%, 100% { box-shadow: 0 0 0 rgba(233, 120, 155, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(233, 120, 155, 0.2); }
+    }
+
+    .surprise-wrap {
+      text-align: center;
+    }
+
+    .surprise-btn {
+      font-size: 1rem;
+      padding: 0.8rem 1.2rem;
+      margin-top: 0.4rem;
+    }
+
+    .surprise {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 14px;
+      background: #fff3f8;
+      border: 1px solid rgba(233, 120, 155, 0.3);
+      display: none;
+      animation: fadeUp 0.8s ease forwards;
+      font-weight: 600;
+      color: #8a3f57;
+    }
+
+    .surprise.show {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .iframe-wrap {
+      margin-top: 1rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(233, 120, 155, 0.3);
+      min-height: 210px;
+      background: #fff;
+      display: none;
+    }
+
+    .iframe-wrap.active {
+      display: block;
+    }
+
+    .iframe-wrap iframe {
+      width: 100%;
+      min-height: 210px;
+      border: 0;
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 1.2rem 0.75rem 2rem; }
+      section { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-container" id="hearts"></div>
+  <div id="sparkles"></div>
+
+  <main class="page">
+    <section class="hero reveal">
+      <h1 class="title">Feliz 14 de Febrero preciosa</h1>
+      <p class="subtitle">Te dije que no serias espectadora. Hice esto con mucho cariño para ti, eres muy especial en mi vida. 🩶</p>
+    </section>
+
+    <section class="reveal">
+      <h2 class="section-title">Te las dedico...</h2>
+      <div id="musicGrid" class="music-grid"></div>
+      <div id="videoPlayer" class="iframe-wrap"></div>
+    </section>
+
+    <section class="reveal">
+      <h2 class="section-title">Para ti... Mrs Soff Decente...</h2>
+      <article class="message-card" id="dedicationMessage">
+        Esta es una de las cartas que tendras este dia... 
+        Los dos sabemos que teniamos un vinculo que no tendremos con nadie mas y aunque
+        ya no estemos juntos (por ahora) se que en el fondo siempre existira. o al menos para mi...
+        Prometi estar aqui para ti, sin importar las circunstancias, y ahora y siempre cumplire esa promesa.
+        Valoro como no tienes idea todo lo que hemos compartido juntos y que en un futuro cercano,
+        seguiremos compartiendo y mas que valorarlo, marco un antes y un despues en mi vida.
+        Mi corazoncito de pollo, late al compas del tuyo, dia a dia, noche tras noche, 
+        quiero que sepas que no tengo ojos para alguien mas, mi corazon solo le pertenece a uhna sola persona
+        y esa persona se llama Danna Sofia Sanchez Mendez. Te esperare para continuar escribiendo nuestro hermoso
+        libro de amor, este libro no ha terminado y estare aqui siempre con mis brazos abiertos, listos, para recibirte.
+        Eres unica mi Sofi, nunca lo olvides.
+        Finalmente quiero que sepas que cada noche oro por ti, se que Dios nos tiene preparado un futuro hermoso para los dos... 
+        Cada dia trabajo constantemente en mi para que podamos tener un vinculo eternamente hermoso.
+        Te amo infinitamente mi querida Sofi... 🩶 - Mr Juanda Indecente... Tu lindote
+      </article>
+    </section>
+
+    <section class="surprise-wrap reveal">
+      <h2 class="section-title">Un mensajito especial</h2>
+      <button class="btn surprise-btn" id="surpriseBtn">Haz clic aquí ❤️</button>
+      <div class="surprise" id="surpriseMessage">Eres mi casualidad favorita y mi destino más hermoso. ✨ Te amo infinitamente.</div>
+    </section>
+  </main>
+
+  <script>
+    const songs = [
+      {
+        title: 'Nunca Tuve Tanto',
+        url: 'https://www.youtube.com/watch?v=je8ZAs2CkG8',
+        embed: 'https://www.youtube.com/watch?v=je8ZAs2CkG8'
+      },
+      {
+        title: 'El Cielo',
+        url: 'https://www.youtube.com/watch?v=Qd1A6OWcZkM',
+        embed: 'https://www.youtube.com/watch?v=Qd1A6OWcZkM'
+      },
+      {
+        title: 'Sorpresa...',
+        url: 'https://www.youtube.com/watch?v=F1COh7t3el4',
+        embed: 'https://www.youtube.com/watch?v=F1COh7t3el4'
+      }
+    ];
+
+    const musicGrid = document.getElementById('musicGrid');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    songs.forEach((song) => {
+      const card = document.createElement('article');
+      card.className = 'song-card';
+
+      const title = document.createElement('h3');
+      title.className = 'song-title';
+      title.textContent = song.title;
+
+      const actions = document.createElement('div');
+      actions.className = 'song-actions';
+
+      const listenBtn = document.createElement('a');
+      listenBtn.className = 'btn';
+      listenBtn.href = song.url;
+      listenBtn.target = '_blank';
+      listenBtn.rel = 'noopener noreferrer';
+      listenBtn.textContent = 'Escuchar';
+
+      actions.appendChild(listenBtn);
+
+      if (song.embed) {
+        const playHereBtn = document.createElement('button');
+        playHereBtn.className = 'btn secondary';
+        playHereBtn.textContent = 'Reproducir aquí';
+        playHereBtn.addEventListener('click', () => {
+          videoPlayer.innerHTML = `<iframe src="${song.embed}" title="${song.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+          videoPlayer.classList.add('active');
+          videoPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        actions.appendChild(playHereBtn);
+      }
+
+      card.appendChild(title);
+      card.appendChild(actions);
+      musicGrid.appendChild(card);
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    revealElements.forEach((el) => observer.observe(el));
+
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const surpriseMessage = document.getElementById('surpriseMessage');
+
+    surpriseBtn.addEventListener('click', () => {
+      surpriseMessage.classList.toggle('show');
+      launchHeartBurst();
+    });
+
+    const heartsContainer = document.getElementById('hearts');
+
+    function createFloatingHeart(extraClass = '') {
+      const heart = document.createElement('span');
+      heart.className = `heart ${extraClass}`.trim();
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.bottom = '-20px';
+      heart.style.animationDuration = `${5 + Math.random() * 6}s`;
+      heart.style.opacity = (0.5 + Math.random() * 0.4).toFixed(2);
+      heart.style.transform += ` scale(${0.7 + Math.random() * 0.8})`;
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
+    }
+
+    function launchHeartBurst() {
+      for (let i = 0; i < 24; i++) {
+        setTimeout(() => createFloatingHeart('burst'), i * 55);
+      }
+    }
+
+    setInterval(() => createFloatingHeart(), 620);
+
+    const sparkleWrap = document.getElementById('sparkles');
+    for (let i = 0; i < 26; i++) {
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.style.left = `${Math.random() * 100}vw`;
+      s.style.top = `${Math.random() * 100}vh`;
+      s.style.animationDelay = `${Math.random() * 3}s`;
+      s.style.animationDuration = `${1.8 + Math.random() * 2.2}s`;
+      sparkleWrap.appendChild(s);
+    }
+  </script>
+</body>
+</html>
